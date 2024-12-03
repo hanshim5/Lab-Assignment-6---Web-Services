@@ -21,11 +21,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.marsphotos"
+    namespace = "com.example.flickrphotos"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.marsphotos"
+        applicationId = "com.example.flickrphotos"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
