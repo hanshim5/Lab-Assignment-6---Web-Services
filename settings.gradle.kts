@@ -30,5 +30,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "FlickrPhotos"
+rootProject.name = "MarsPhotos"
 include (":app")
