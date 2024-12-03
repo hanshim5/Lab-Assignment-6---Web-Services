@@ -22,26 +22,23 @@ import kotlinx.serialization.Serializable
 /**
  * This data class defines a Mars photo which includes an ID, and the image URL.
  */
-//@Serializable
-//data class FlickrPhoto(
-//    val id: String,
-//    @SerialName(value = "img_src")
-//    val imgSrc: String
-//)
+
 @Serializable
 data class FlickrResponse(
-    val photos: Photos,
-    val stat: String
+    val photos: Photos
 )
 
 @Serializable
 data class Photos(
     val photo: List<FlickrPhoto>
 )
-
 @Serializable
 data class FlickrPhoto(
     val id: String,
-    @SerialName("url_s") val imgSrc: String? // Ensure you request `url_s` in extras.
-)
-
+    val secret: String,
+    val server: String,
+) {
+    val imgSrc: String
+        get() = "https://live.staticflickr.com/$server/$id" +
+                "_$secret" + "_b.jpg" // _w is for medium size, change as needed
+}

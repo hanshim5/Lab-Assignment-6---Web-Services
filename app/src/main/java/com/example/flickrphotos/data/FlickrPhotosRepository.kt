@@ -30,17 +30,40 @@ interface FlickrPhotosRepository {
 /**
  * Network Implementation of Repository that fetch Flickr photos list from marsApi.
  */
+//class NetworkFlickrPhotosRepository(
+//    private val flickrApiService: FlickrApiService
+//) : FlickrPhotosRepository {
+//    /** Fetches list of FlickrPhoto from flickrApi*/
+//    override suspend fun getFlickrPhotos(): List<FlickrPhoto> {
+//        try {
+//            val response = flickrApiService.getPhotos(
+//                apiKey = "52ddad1635e1f58ff1a1fade105faaf2", // Your API key
+//                userId = "201970008@N08" // Replace with your Flickr user ID
+//            )
+//            Log.d("FlickrAPI", "Response: $response")
+//            return response.photos.photo
+//        } catch (e: Exception) {
+//            Log.e("FlickrAPI", "Error fetching photos", e)
+//            throw e
+//        }
+//    }
+//}
 class NetworkFlickrPhotosRepository(
     private val flickrApiService: FlickrApiService
 ) : FlickrPhotosRepository {
-    /** Fetches list of FlickrPhoto from flickrApi*/
     override suspend fun getFlickrPhotos(): List<FlickrPhoto> {
         try {
             val response = flickrApiService.getPhotos(
-                apiKey = "52ddad1635e1f58ff1a1fade105faaf2", // Your API key
-                userId = "201970008@N08" // Replace with your Flickr user ID
+                apiKey = "YOUR_API_KEY",  // Replace with your actual API key
+                userId = "YOUR_USER_ID"   // Replace with your actual Flickr user ID
             )
-            return response.photos.photo
+
+            // Log the imgSrc of each photo in the response
+            response.photos.photo.forEach { photo ->
+                Log.d("FlickrAPI", "Image URL: ${photo.imgSrc}") // Log imgSrc
+            }
+
+            return response.photos.photo  // Return the list of FlickrPhoto objects
         } catch (e: Exception) {
             Log.e("FlickrAPI", "Error fetching photos", e)
             throw e

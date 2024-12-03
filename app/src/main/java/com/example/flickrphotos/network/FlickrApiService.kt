@@ -37,6 +37,5 @@ interface FlickrApiService {
         @Query("user_id") userId: String,
         @Query("format") format: String = "json",
         @Query("nojsoncallback") noJsonCallback: Int = 1,
-        @Query("extras") extras: String = "url_s"
     ): FlickrResponse
 }

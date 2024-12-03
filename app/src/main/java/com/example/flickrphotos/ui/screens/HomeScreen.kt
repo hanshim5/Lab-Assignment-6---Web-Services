@@ -15,6 +15,7 @@
  */
 package com.example.flickrphotos.ui.screens
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -93,33 +94,26 @@ fun ErrorScreen(modifier: Modifier = Modifier) {
  * ResultScreen displaying number of photos retrieved.
  */
 @Composable
-//fun ResultScreen(photos: String, modifier: Modifier = Modifier) {
-//    Box(
-//        contentAlignment = Alignment.Center,
-//        modifier = modifier
-//    ) {
-//        Text(text = photos)
-//    }
-//}
 fun PhotosGridScreen(photos: List<FlickrPhoto>, modifier: Modifier = Modifier) {
     LazyVerticalGrid(
         columns = GridCells.Adaptive(128.dp),
         modifier = modifier
     ) {
         items(photos) { photo ->
-            photo.imgSrc?.let { url ->
-                AsyncImage(
-                    model = url,
-                    contentDescription = null,
-                    modifier = Modifier
-                        .padding(4.dp)
-                        .clip(RoundedCornerShape(8.dp))
-                        .background(MaterialTheme.colorScheme.surface)
-                )
-            }
+            Log.d("PhotosGridScreen", "Image URL: ${photo.imgSrc}")
+
+            AsyncImage(
+                model = photo.imgSrc,
+                contentDescription = null,
+                modifier = Modifier
+                    .padding(4.dp)
+                    .clip(RoundedCornerShape(8.dp))
+                    .background(MaterialTheme.colorScheme.surface)
+            )
         }
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable
@@ -145,6 +139,7 @@ fun ErrorScreenPreview() {
 //        ResultScreen(stringResource(R.string.placeholder_success))
 //    }
 //}
+
 //user_id: 201970008@N08
 //key: 52ddad1635e1f58ff1a1fade105faaf2
 //secret: 8e39f2864b3f57ea

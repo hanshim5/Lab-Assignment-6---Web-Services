@@ -15,6 +15,7 @@
  */
 package com.example.flickrphotos.ui.screens
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -56,14 +57,30 @@ class FlickrViewModel(private val flickrPhotosRepository: FlickrPhotosRepository
      * Gets Flickr photos information from the Flickr API Retrofit service and updates the
      * [FlickrPhoto] [List] [MutableList].
      */
+//    fun getFlickrPhotos() {
+//        viewModelScope.launch {
+//            flickrUiState = FlickrUiState.Loading
+//            flickrUiState = try {
+//                val photos = flickrPhotosRepository.getFlickrPhotos()
+//                FlickrUiState.Success(photos)
+//            } catch (e: IOException) {
+//                FlickrUiState.Error
+//            } catch (e: HttpException) {
+//                FlickrUiState.Error
+//            }
+//        }
+//    }
     fun getFlickrPhotos() {
         viewModelScope.launch {
             flickrUiState = FlickrUiState.Loading
             flickrUiState = try {
                 val photos = flickrPhotosRepository.getFlickrPhotos()
-//                FlickrUiState.Success(
-//                    "Success: ${listResult.size} Flickr photos retrieved"
-//                )
+
+                // Log imgSrc of each photo after retrieving from the repository
+                photos.forEach { photo ->
+                    Log.d("FlickrViewModel", "Image URL: ${photo.imgSrc}")
+                }
+
                 FlickrUiState.Success(photos)
             } catch (e: IOException) {
                 FlickrUiState.Error
